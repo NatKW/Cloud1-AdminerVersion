@@ -1,0 +1,18 @@
+---
+- name: Build Adminer Image
+  community.docker.docker_image:
+    name: adminer
+    source: build
+    build: 
+      path: /tmp/adminer/
+ 
+- name: Run Adminer container
+  community.docker.docker_container: 
+    name: adminer
+    image: adminer
+    state: started
+    restart: yes
+    networks:
+       - name: inception_network
+    ports:
+       - 8080:8080

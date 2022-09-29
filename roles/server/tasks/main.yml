@@ -1,0 +1,27 @@
+---
+- name: Update Nginx configuration
+  template:
+    src: ./roles/server/templates/nginx.conf.j2
+    dest: /tmp/nginx/nginx.conf
+
+- name: Build Nginx image from Dockerfile
+  community.docker.docker_image:
+    name: nginx
+    tag: my_img
+    source: build
+    build:
+      path: /tmp/nginx
+      
+
+- name: Run nginx Container
+  community.docker.docker_container:
+    name: nginx
+    image: nginx:my_img
+    state: started
+    ports:
+      - "80:80"
+      - "443:443"  
+    volumes:
+      - web_data:/var/www/html
+    networks:
+      - name: inception_network

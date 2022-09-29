@@ -1,0 +1,35 @@
+--- 
+- name: Install tools
+  apt: 
+    name: ['git', 'wget', 'curl', 'aptitude', 'lsb-release']
+    state: present
+    update_cache: yes
+
+- name: Add docker prerequisites
+  apt:
+      pkg:
+        - ca-certificates
+        - apt-transport-https
+        - gnupg
+        - python3-pip
+        - virtualenv
+        - python3-setuptools
+      update_cache: yes
+      autoclean: true
+
+- name: Check for older Docker-version
+  apt: 
+    name: docker.docker-engine
+    state: absent       
+
+- name: Update apt and install docker
+  apt:
+    name: docker.io
+    state: latest
+    update_cache: true
+    
+- name: install docker python module
+  pip:
+      name: 
+      - docker
+...

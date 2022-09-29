@@ -1,0 +1,36 @@
+---
+- name: Desinstall tools
+  apt: 
+    name: ['git', 'wget', 'curl', 'aptitude', 'lsb-release']
+    state: absent
+    update_cache: yes
+
+- name: Desinstall docker python module
+  pip:
+      name: 
+      - docker
+      state: absent
+
+- name: Remove docker prerequisites
+  apt:
+      pkg:
+        - ca-certificates
+        - apt-transport-https
+        - gnupg
+        - python3-pip
+        - virtualenv
+        - python3-setuptools
+      update_cache: yes
+      autoclean: true
+      state: absent 
+
+- name: Update apt and remove docker
+  apt:
+    name: docker.io
+    state: absent
+    update_cache: true
+
+- name: Clean unwanted older stuff
+  apt:
+    autoremove: yes
+    purge: yes    

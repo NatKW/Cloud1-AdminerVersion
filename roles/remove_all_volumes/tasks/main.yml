@@ -1,0 +1,13 @@
+---
+
+- name: remove volume on remote server
+  shell: rm -rf data
+
+- name: Get infos on docker volumes
+  docker_host_info:
+    volumes: yes
+  register: docker_info
+ 
+- name: remove all docker volumes
+  shell: docker volume rm $(docker volume ls -q) 
+  when: (docker_info.volumes | length) != 0

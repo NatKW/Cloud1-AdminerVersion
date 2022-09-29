@@ -1,0 +1,27 @@
+---
+- name: Deny traffic IN
+  ufw: 
+    default: deny
+    direction: incoming
+
+- name: Allow traffic OUT
+  ufw: 
+    default: allow
+    direction: outgoing
+
+- name: Allow Ports
+  ufw: 
+    rule: allow
+    port: "{ item }"
+  loop: 
+  - '80'
+  - 'ssh'
+  - '9000'
+  - '9001'
+  - '3306'
+  - '443'
+
+- name: Enable UFW
+  ufw:
+    state: enabled
+...    

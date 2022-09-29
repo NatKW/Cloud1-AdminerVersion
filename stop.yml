@@ -1,0 +1,14 @@
+---
+- name: Stop Cloud-1 42's project
+  hosts: all
+  remote_user: root
+
+  roles:
+    - role: remove_all_containers
+      tags: 
+        - stop
+        - kill
+    - role: remove_all_volumes 
+      tags: kill
+    - role: remove_all_prerequisites
+      tags: clean      
