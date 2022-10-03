@@ -19,7 +19,6 @@
     image: nginx:my_img
     state: started
     ports:
-      - "80:80"
       - "443:443"  
     volumes:
       - web_data:/var/www/html
