@@ -10,6 +10,8 @@ CLOUD1_DB_ADMIN_EMAIL: nade-la-@student.42.fr
 WP_USER: nath.burgade
 WP_EMAIL: nath.burgade@gmail.com
 
+ADMINER_DB_NAME: "{{ CLOUD1_DB_NAME }}"
+
 MARIADB_ROOT_PASSWORD: '{{ lookup("vault", "MARIADB_ROOT_PASSWORD") }}'
 MARIADB_PASSWORD: '{{ lookup("vault", "MARIADB_PASSWORD") }}'    
 CLOUD1_DB_ADMIN_PWD: '{{ lookup("vault", "CLOUD1_DB_ADMIN_PWD") }}'
